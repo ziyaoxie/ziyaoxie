@@ -8,7 +8,7 @@
 
 ## Pwn
 
-- Finish [Toddler's Bottle](http://pwnable.kr/play.php) in pwnable.kr
+- Finish [Toddler's Bottle](http://pwnable.kr/play.php) in [Pwn](https://github.com/ZiyaoXie/Pwn)
 
 ## More
 
