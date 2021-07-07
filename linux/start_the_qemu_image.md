@@ -1,4 +1,4 @@
-# Start The QEMU Image
+# Start the QEMU Image
 
 ## QEMU
 

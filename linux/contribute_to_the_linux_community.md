@@ -1,4 +1,4 @@
-# Contribute To The Linux Community
+# Contribute to the Linux Community
 
 ## Documents
 
