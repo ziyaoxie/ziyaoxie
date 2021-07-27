@@ -14,6 +14,7 @@ make install
 
 ```Shell
 sudo apt-get install gcc-arm-linux-gnueabi
+# sudo apt-get install gcc-aarch64-linux-gnu
 ```
 
 ## Compile the kernel image
@@ -21,8 +22,10 @@ sudo apt-get install gcc-arm-linux-gnueabi
 ```Shell
 git clone https://github.com/torvalds/linux.git
 cd linux && make CROSS_COMPILE=arm-linux-gnueabi- ARCH=arm vexpress_defconfig
+# cd linux && make CROSS_COMPILE=aarch64-linux-gnu- ARCH=arm64 defconfig
 # or make menuconfig if you need
 make -j$(nproc) CROSS_COMPILE=arm-linux-gnueabi- ARCH=arm
+# make -j$(nproc) CROSS_COMPILE=aarch64-linux-gnu- ARCH=arm64
 # get image file at arch/arm/boot/zImage
 ```
 
@@ -35,7 +38,9 @@ cd busybox && make menuconfig
 # set "Build BusyBox as a static binary (no shared libs)" to y:
 # Busybox Settings ---> Build Options ---> Build BusyBox as a static binary (no shared libs)
 make defconfig && make -j$(nproc) CROSS_COMPILE=arm-linux-gnueabi- ARCH=arm
+# make defconfig && make -j$(nproc) CROSS_COMPILE=aarch64-linux-gnu- ARCH=arm64
 make install CROSS_COMPILE=arm-linux-gnueabi- ARCH=arm
+# make install CROSS_COMPILE=aarch64-linux-gnu- ARCH=arm64
 ```
 
 ## Rootfs
@@ -45,6 +50,7 @@ mkdir -p rootfs/{dev,lib,mnt,proc,root,sys,tmp,var}
 mkdir -p rootfs/etc/init.d
 cp -rf busybox/_install/* rootfs/
 sudo cp -P /usr/arm-linux-gnueabi/lib/* rootfs/lib/
+# sudo cp -P /usr/aarch64-linux-gnu/lib/* rootfs/lib/
 ```
 
 - `dev`
@@ -130,4 +136,5 @@ umount tmpfs
 
 ```Shell
 qemu-system-arm -M vexpress-a9 -m 512m -kernel ./linux/arch/arm/boot/zImage -dtb ./linux/arch/arm/boot/dts/vexpress-v2p-ca9.dtb -nographic -append "root=/dev/mmcblk0 console=ttyAMA0" -sd rootfs.ext4
+# qemu-system-aarch64 -machine virt -cpu cortex-a57 -m 1024 -smp 4 -kernel ./linux/arch/arm64/boot/Image --append "noinitrd root=/dev/vda rw console=ttyAMA0 loglevel=8" -nographic -driver if=none,file=rootfs.ext4,id=hd0 -device virtio-blk-device,drive=hd0
 ```
