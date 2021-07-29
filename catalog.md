@@ -2,10 +2,10 @@
 
 ## Linux
 
-- [Bit Field, Endianness and Byte Alignment](linux/bitField_endianness_byteAlignment.md)
-- [Contribute to the Linux Community](linux/contribute_to_the_linux_community.md)
-- [Global Offset Table](linux/global_offset_table.md)
-- [Start the QEMU Image](linux/start_the_qemu_image.md)
+- [Bit Field, Endianness and Byte Alignment](linux/bitField_endianness_byteAlignment/bitField_endianness_byteAlignment.md)
+- [Contribute to the Linux Community](linux/contribute_to_the_linux_community/contribute_to_the_linux_community.md)
+- [Global Offset Table](linux/global_offset_table/global_offset_table.md)
+- [Start the QEMU Image](linux/start_the_qemu_image/start_the_qemu_image.md)
 
 ## Todolist
 
