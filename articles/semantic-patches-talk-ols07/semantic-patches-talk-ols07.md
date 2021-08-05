@@ -40,3 +40,64 @@ The first excerpt adds and removes the affected parameters of the proc_info call
       int inout) { ... }
 ```
 
+Like a traditional patch, a semantic patch consists of a sequence of lines, some of which begin with the *modifiers* `+` and `-` in the first column. These lines are added or removed, respectively. The remaining lines serve as *context*, to more precisely identify the code that should be modified.
+
+**Unlike a traditional patch, a semantic patch must have the form of a complete C-language term (an expression, a statement, a function definition, etc.).** Here we are modifying a function, so the semantic patch has the form of a function definition. Because our only goal at this point is to modify the parameter list, we do not care about the function body. Thus, we have represented it with “...”.
+
+**Another difference as compared to a traditional patch is that the meaning of a semantic patch is insensitive to newlines, spaces, comments, etc.**
+
+To apply a semantic patch, it should be stored in a file, *e.g.*, `procinfo.spatch`. It can then be applied to *e.g.* the set of C files in the current directory using our spatch tool:
+
+```shell
+spatch *.c < procinfo.spatch
+```
+
+#### Metavariables
+
+SmPL provides *metavariables* which is a variable that matches an arbitrary term in the driver source code. Metavariables are declared before the patch code specifying the transformation, between `@@`, borrowing the notation for delimiting line numbers in a traditional patch (Figure above, lines 2 and 37). **Metavariables are designated as matching terms of a specific kind, such as an identifier, expression, or statement, or terms of a specific type, such as `int` or `off_t`. We call the combination of the declaration of a set of metavariables and a transformation specification a *rule*.**
+
+Back to our running example, the previous excerpt is made into a rule as follows:
+
+```C
+@@
+identifier proc_info_func;
+identifier buffer, start, offset, inout, hostno;
+identifier hostptr;
+@@
+ proc_info_func (
++        struct Scsi_Host *hostptr,
+         char *buffer, char **start, off_t offset,
+-        int hostno,
+         int inout) { ... }
+```
+
+This code now amounts to a complete, valid semantic patch, although it still only performs part of our desired collateral evolution.
+
+#### Multiple rules and inherited metavariables
+
+**SmPL allows a semantic patch to define multiple rules, just as a traditional patch contains multiple regions separated by `@@`.** The rules are applied in sequence, with each of them being applied to the entire source code of the driver. In our example we thus define one rule to identify the name of the callback function and another to transform its definition, as follows:
+
+```C
+@ rule1 @
+struct SHT ops;
+identifier proc_info_func;
+@@
+  ops.proc_info = proc_info_func;
+
+@ rule2 @
+identifier rule1.proc_info_func;
+identifier buffer, start, offset, inout, hostno;
+identifier hostptr;
+@@
+  proc_info_func (
++        struct Scsi_Host *hostptr,
+         char *buffer, char **start, off_t offset,
+-        int hostno,
+         int inout) { ... }
+```
+
+In the new semantic patch, the metavariable `proc_info_func` is defined in the first rule and referenced in the second rule, where we expect it to have the same value, which is enforced by spatch. In general, a rule may declare new metavariables and *inherit* metavariables from previous rules. Inheritance is explicit, in that the inherited metavariable must be declared again in the inheriting rule, and is associated with the name of the rule from which its value should be inherited (the rule name is only used in the metavariable declaration, but not in the transformation specification, which retains the form of ordinary C code). To allow this kind of inheritance, we must have means of naming rules. As shown in the semantic patch above, the name of a rule is placed between `@@` at the beginning of a metavariable declaration. A name is optional, and is not needed if the rule does not export any metavariables.
+
+Note that the first rule does not perform any transformations. Instead, its only role is to bind the `proc_info_func` metavariable to constrain the matching of the second rule. Once a metavariable obtains a value it keeps this value until the end of the current rule and in any subsequent rules that inherit it.
+
+A metavariable may take on multiple values, if the rule matches at multiple places in the driver code. If such a metavariable is inherited, the inheriting rule is applied once for each possible set of bindings of the metavariables it inherits.
