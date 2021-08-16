@@ -3,7 +3,15 @@
 ## LTP
 
 - Add more tests for [epoll_wait](https://github.com/linux-test-project/ltp/issues/792)
-- Bugfix for [rt-migrate test](https://github.com/linux-test-project/ltp/issues/812) on multi-core server
+- Add tests for epoll:
+  ```shell
+  # Add Epoll testcases for ltp
+  ltp/testcases/kernel/syscalls/epoll
+  ltp/testcases/kernel/syscalls/epoll_wait
+  ltp/testcases/kernel/syscalls/epoll_pwait
+  ltp/testcases/kernel/syscalls/epoll_create1
+  ltp/testcases/kernel/syscalls/epoll_ctl
+  ```
 
 ## Pwn
 
