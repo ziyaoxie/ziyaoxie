@@ -13,6 +13,7 @@ Contact me on [Twitter](https://twitter.com/XieZiyao) or [LinkedIn](https://www.
 - [Contribute to the Linux Community](linux/contribute_to_the_linux_community/contribute_to_the_linux_community.md)
 - [Epoll](linux/epoll/epoll.md)
 - [Global Offset Table](linux/global_offset_table/global_offset_table.md)
+- [I/O Models](linux/io_models/io_models.md)
 - [Start the QEMU Image](linux/start_the_qemu_image/start_the_qemu_image.md)
 
 # Articles
