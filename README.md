@@ -1,19 +1,8 @@
-# November
+## Hi, I'm Xie Ziyao, a Developer from Shenzhen, China.
 
-## LTP
+[![Linkedin](https://img.shields.io/badge/-LinkedIn-blue?style=flat&logo=Linkedin&logoColor=white)](https://www.linkedin.com/in/xieziyao/)
+[![Outlook](https://img.shields.io/badge/-Outlook-0078D4?style=flat&logo=Microsoft-Outlook&logoColor=white)](mailto:ziyaoxie@outlook.com)
+[![Twitter](https://img.shields.io/badge/-Twitter-1DA1F2?style=flat&logo=Twitter&logoColor=white)](https://twitter.com/XieZiyao)
 
-- [Add more epoll fd flag coverage](https://github.com/linux-test-project/ltp/issues/860)
+![Ziyao's GitHub stats](https://github-readme-stats.vercel.app/api?username=ziyaoxie&hide=contribs,prs)
 
-## Articles
-
-- [MapReduce: Simplified Data Processing on Large Clusters](https://github.com/ZiyaoXie/ZiyaoXie/issues/4)
-- [Semantic Patches](https://github.com/ZiyaoXie/ZiyaoXie/issues/3)
-
-## Blogs
-
-- [Asynchronous IO](https://github.com/ZiyaoXie/ZiyaoXie/issues/2)
-- [MySql 5.7 Reference](https://github.com/ZiyaoXie/ZiyaoXie/issues/14)
-
-## More
-
-[Profile, Blogs, Todolist...](catalog.md)
