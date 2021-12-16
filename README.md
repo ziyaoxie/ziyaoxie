@@ -4,5 +4,3 @@
 [![Outlook](https://img.shields.io/badge/-Outlook-0078D4?style=flat&logo=Microsoft-Outlook&logoColor=white)](mailto:ziyaoxie@outlook.com)
 [![Twitter](https://img.shields.io/badge/-Twitter-1DA1F2?style=flat&logo=Twitter&logoColor=white)](https://twitter.com/XieZiyao)
 
-![Ziyao's GitHub stats](https://github-readme-stats.vercel.app/api?username=ziyaoxie&hide=contribs,prs)
-
